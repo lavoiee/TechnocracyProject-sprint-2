@@ -14,7 +14,7 @@ namespace TechnocracyProject
         #region FIELDS
 
         private string _commonName;
-        private int _spaceTimeLocationID; // must be a unique value for each object
+        private int _spaceTimeLocationID; //  must be a unique value for each object
         private int _universalDate;
         private string _universalLocation;
         private string _description;
