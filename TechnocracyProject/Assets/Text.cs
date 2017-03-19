@@ -17,11 +17,11 @@ namespace TechnocracyProject
         public static string MissionIntro()
         {
             string messageBoxText =
-                "A major scientific breakthrough has just occured on station IX in " +
-                "orbit around the blue super giant A357. The council on Tanak has " +
+                "A major scientific breakthrough has just occurred on station IX in " +
+                "orbit around the blue super giant A357. The imperial council has " +
                 "ordered us to transport you and your team to the station on the " +
                 "next ship passing through the artificial black holes connecting " +
-                "these two spacetimes.\n" +
+                "these two space-times.\n" +
                 "\n" +
                 "You will seize the technology being developed on station IX, " +
                 "take the scientific team into imperial custody, and transport them to the " +
@@ -30,7 +30,8 @@ namespace TechnocracyProject
                 "the core of the star. There must be no evidence remaining once you " +
                 "leave that system.\n" +
                 "\n" +
-                "You have one hour to prepare your team.\n";
+                "You have one hour to prepare your team.\n" +
+                "Press any key to begin\n";
             
             return messageBoxText;
         }
@@ -50,9 +51,9 @@ namespace TechnocracyProject
         public static string InitializeMissionIntro()
         {
             string messageBoxText =
-                "Before you begin your mission we much gather your base data.\n" +
+                "Before you begin the mission we need vital information.\n" +
                 " \n" +
-                "You will be prompted for the required information. Please enter the information below.\n" +
+                "Enter the information as you are prompted.\n" +
                 " \n" +
                 "\tPress any key to begin.";
 
@@ -62,9 +63,9 @@ namespace TechnocracyProject
         public static string InitializeMissionGetTravelerName()
         {
             string messageBoxText =
-                "Enter your name traveler.\n" +
+                "Enter your name as provided by the imperium.\n" +
                 " \n" +
-                "Please use the name you wish to be referred by during your mission.";
+                "This will be your official name during the mission.";
 
             return messageBoxText;
         }
@@ -72,11 +73,11 @@ namespace TechnocracyProject
         public static string InitializeMissionGetTravelerAge(Adama gameTraveler)
         {
             string messageBoxText =
-                $"Very good then, we will call you {gameTraveler.Name} on this mission.\n" +
+                $"Thank you {gameTraveler.Name}, Please continue...\n" +
                 " \n" +
                 "Enter your age below.\n" +
                 " \n" +
-                "Please use the standard Earth year as your reference.";
+                "Please use the galactic year as your reference.";
 
             return messageBoxText;
         }
@@ -136,7 +137,7 @@ namespace TechnocracyProject
             string messageBoxText =
                 $"{gameTraveler.Name}, it will be important for us to know your Home Dimension on this mission.\n" +
                 " \n" +
-                "Enter your Home Dimesnion below.\n" +
+                "Enter your Home Dimension below.\n" +
                 " \n" +
                 "Please use the universal Dimension classifications below." +
                 " \n";
@@ -159,11 +160,11 @@ namespace TechnocracyProject
         public static string InitializeMissionGetTravelerRace(Adama gameTraveler)
         {
             string messageBoxText =
-                $"{gameTraveler.Name}, it will be important for us to know your race on this mission.\n" +
+                $"{gameTraveler.Name}, it will be important for us to know your genetic type on this mission.\n" +
                 " \n" +
-                "Enter your race below.\n" +
+                "Enter your genetic type below.\n" +
                 " \n" +
-                "Please use the universal race classifications below." +
+                "Please use the genetic type classifications below." +
                 " \n";
 
             string raceList = null;
@@ -184,9 +185,9 @@ namespace TechnocracyProject
         public static string InitializeMissionEchoTravelerInfo(Adama gameTraveler)
         {
             string messageBoxText =
-                $"Very good then {gameTraveler.Name}.\n" +
+                $"Thank you {gameTraveler.Name}.\n" +
                 " \n" +
-                "It appears we have all the necessary data to begin your mission. You will find it" +
+                "We have logged your vital information. You will find it" +
                 " listed below.\n" +
                 " \n" +
                 $"\tTraveler Name: {gameTraveler.Name}\n" +
@@ -214,7 +215,7 @@ namespace TechnocracyProject
         public static string Travel(Adama gametraveler, List<SpaceTimeLocation> spaceTimeLocations)
         {
             string messageBoxText =
-                $"{gametraveler.Name}, Aion Base will need to know the name of the new location.\n" +
+                $"{gametraveler.Name}, The imperial council will need to know the name of the new location.\n" +
                 " \n" +
                 "Enter the ID number of your desired location from the table below.\n" +
                 " \n" +

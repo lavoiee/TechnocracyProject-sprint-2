@@ -32,7 +32,13 @@ namespace TechnocracyProject
     public class Adama : Character
     {
         #region ENUMERABLES
-
+        public enum WeaponType
+        {
+            NONE,
+            PHASER,
+            PLASMARIFLE,
+            ATOMICMINE
+        }
 
         #endregion
 
@@ -42,13 +48,14 @@ namespace TechnocracyProject
         private Dimension _homeDimension;
         private int _rank = 1; //TODO: implement. Just issue default rank.
         private string _rankPrefix = "X"; //TODO: implement a rank string to prefix to the numerical rank.
-        private bool _alive;
-        private TimeSpan _timeAlive; //TODO: Implement Adama._timeAlive.
-
+        private bool _discharged;
+        private TimeSpan _missionTime; //TODO: Implement Adama._missionTime.
+        private WeaponType _weapon;
         private int _experiencePoints;
         private int _health;
         private int _lives;
         private List<int> _spaceTimeLocationsVisited;
+        
         #endregion
 
 
@@ -107,16 +114,22 @@ namespace TechnocracyProject
             set { _rankPrefix = value; }
         }
 
-        public bool Alive
+        public bool Discharged
         {
-            get { return _alive; }
-            set { _alive = value; }
+            get { return _discharged; }
+            set { _discharged = value; }
         }
 
-        public TimeSpan TimeAlive
+        public TimeSpan MissionTime
         {
-            get { return _timeAlive; }
-            set { _timeAlive = value; }
+            get { return _missionTime; }
+            set { _missionTime = value; }
+        }
+
+        public WeaponType Weapon
+        {
+            get { return _weapon; }
+            set { _weapon = value; }
         }
         #endregion
 

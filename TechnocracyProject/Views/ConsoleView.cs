@@ -52,7 +52,7 @@ namespace TechnocracyProject
         #endregion
 
         #region METHODS
-
+        
         public void DisplayGamePlayScreen(string messageBoxHeaderText, string messageBoxText, Menu menu, string inputBoxPrompt)
         {
             //
@@ -68,6 +68,7 @@ namespace TechnocracyProject
             DisplayMessageBox(messageBoxHeaderText, messageBoxText);
             DisplayMenuBox(menu);
             DisplayInputBox();
+            DisplayStatusBox();
         }
 
         /// <summary>
@@ -350,7 +351,7 @@ namespace TechnocracyProject
                 Console.BackgroundColor = ConsoleTheme.StatusBoxBorderColor;
                 Console.ForegroundColor = ConsoleTheme.StatusBoxForegroundColor;
                 Console.SetCursorPosition(ConsoleLayout.StatusBoxPositionLeft + 2, ConsoleLayout.StatusBoxPositionTop + 1);
-                Console.Write(ConsoleWindowHelper.Center("Game Stats", ConsoleLayout.StatusBoxWidth - 4));
+                Console.Write(ConsoleWindowHelper.Center("Database", ConsoleLayout.StatusBoxWidth - 4));
                 Console.BackgroundColor = ConsoleTheme.StatusBoxBackgroundColor;
                 Console.ForegroundColor = ConsoleTheme.StatusBoxForegroundColor;
 
@@ -498,9 +499,9 @@ namespace TechnocracyProject
         }
 
 
-        public void DisplayTravelerInfo()
+        public void DisplayTravelerInfo(Adama gameTraveler)
         {
-            DisplayGamePlayScreen("Adama Information", Text.InitializeMissionEchoTravelerInfo(_gameTraveler), ActionMenu.MissionIntro, "");
+            DisplayGamePlayScreen($"Vital Information for {gameTraveler.Name}", Text.InitializeMissionEchoTravelerInfo(_gameTraveler), ActionMenu.MainMenu, "");
             GetContinueKey();
         }
 

@@ -40,13 +40,13 @@ namespace TechnocracyProject
         //
         public static ConsoleColor MenuBackgroundColor = ConsoleColor.Black;
         public static ConsoleColor MenuForegroundColor = ConsoleColor.Cyan;
-        public static ConsoleColor MenuBorderColor = ConsoleColor.Gray;
+        public static ConsoleColor MenuBorderColor = ConsoleColor.DarkCyan;
 
         //
         // message box colors
         //
         public static ConsoleColor MessageBoxBackgroundColor = ConsoleColor.Black;
-        public static ConsoleColor MessageBoxForegroundColor = ConsoleColor.Cyan;
+        public static ConsoleColor MessageBoxForegroundColor = ConsoleColor.Yellow;
         public static ConsoleColor MessageBoxBorderColor = ConsoleColor.DarkCyan;
         public static ConsoleColor MessageBoxHeaderBackgroundColor = ConsoleColor.Black;
         public static ConsoleColor MessageBoxHeaderForegroundColor = ConsoleColor.Gray;
@@ -56,7 +56,7 @@ namespace TechnocracyProject
         //
         public static ConsoleColor StatusBoxBackgroundColor = ConsoleColor.Black;
         public static ConsoleColor StatusBoxForegroundColor = ConsoleColor.Gray;
-        public static ConsoleColor StatusBoxBorderColor = ConsoleColor.DarkRed;
+        public static ConsoleColor StatusBoxBorderColor = ConsoleColor.DarkCyan;
         public static ConsoleColor StatusBoxHeaderBackgroundColor = ConsoleColor.Black;
         public static ConsoleColor StatusBoxHeaderForegroundColor = ConsoleColor.Gray;
 

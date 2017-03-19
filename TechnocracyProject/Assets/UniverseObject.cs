@@ -43,40 +43,40 @@ namespace TechnocracyProject.Assets
                         "giant A357 in the Pegasus galaxy. The station is under the command of the " +
                         "machine race and is developing weapons to be used to overthrow the imperium ",
                 GeneralContents = "- Nano particle laboratories and personnel -",
-                Accessable = false,
+                Accessable = true,
                 ExperiencePoints = 10
             },
 
-            //new SpaceTimeLocation
-            //{
-            //    CommonName = "Worm hole (Regulus side)",
-            //    SpaceTimeLocationID = 3,
-            //    UniversalDate = 386759,
-            //    UniversalLocation = "P-6, SS-3978, G-2976, LS-3976",
-            //    Description = "The worm hole in the Regulus system is owned by the Spacing Guild " +
-            //            "Transport Corporation under imperial charter in perpetuity conditioned upon " +
-            //            "their neutrality. This hole leads to A357 in the Pegasus galaxy ",
-            //    GeneralContents = "- Time -",
-            //    Accessable = true,
-            //    ExperiencePoints = 20
-            //},
+            new SpaceTimeLocation
+            {
+                CommonName = "worm hole (Regulus side)",
+                SpaceTimeLocationID = 3,
+                UniversalDate = 386759,
+                UniversalLocation = "p-6, ss-3978, g-2976, ls-3976",
+                Description = "the worm hole in the Regulus system is owned by the spacing guild " +
+                        "transport corporation under imperial charter in perpetuity conditioned upon " +
+                        "their neutrality. this hole leads to a357 in the Pegasus galaxy ",
+                GeneralContents = "- time -",
+                Accessable = true,
+                ExperiencePoints = 20
+            },
 
-            // Not necessarily a Space-Time Location. Your player will not actually be here.
-            // You just need to inform them with some text that they passes through the worm hole.
-            // Unless you actually want something to take place while passing through the hole.
-            //new SpaceTimeLocation
-            //{
-            //    CommonName = "Worm hole (A357 side)",
-            //    SpaceTimeLocationID = 3,
-            //    UniversalDate = 386759,
-            //    UniversalLocation = "P-6, SS-3978, G-2976, LS-3976",
-            //    Description = "The worm hole in the A357 system is owned by the Spacing Guild " +
-            //            "Transport Corporation under imperial charter in perpetuity conditioned upon " +
-            //            "their neutrality. This hole leads to Regulus in the Atlantis galaxy ",
-            //    GeneralContents = "- Time -",
-            //    Accessable = true,
-            //    ExperiencePoints = 20
-            //},
+             //not necessarily a space-time location. your player will not actually be here.
+             //you just need to inform them with some text that they passes through the worm hole.
+             //unless you actually want something to take place while passing through the hole.
+            new SpaceTimeLocation
+            {
+                CommonName = "worm hole (a357 side)",
+                SpaceTimeLocationID = 3,
+                UniversalDate = 386759,
+                UniversalLocation = "p-6, ss-3978, g-2976, ls-3976",
+                Description = "the worm hole in the a357 system is owned by the spacing guild " +
+                        "transport corporation under imperial charter in perpetuity conditioned upon " +
+                        "their neutrality. this hole leads to Regulus in the Atlantis galaxy ",
+                GeneralContents = "- time -",
+                Accessable = true,
+                ExperiencePoints = 20
+            },
 
             new SpaceTimeLocation
             {
@@ -88,7 +88,7 @@ namespace TechnocracyProject.Assets
                         "black hole that prevents it's location from being known.",
                 GeneralContents = "- 1.75 Billion prisoners of various races deported from worlds " +
                         "conquered by the imperium -",
-                Accessable = false,
+                Accessable = true,
                 ExperiencePoints = 10
             },
 
@@ -113,7 +113,7 @@ namespace TechnocracyProject.Assets
                 UniversalLocation = "P-3, SS-278, G-2976, LS-3976",
                 Description = "Regulus is a blue-white main sequence star under control of the imperium ",
                 GeneralContents = "- Hydrogen, Helium, and other elements. ",
-                Accessable = true,
+                Accessable = false,
                 ExperiencePoints = 10
             },
 
@@ -125,7 +125,7 @@ namespace TechnocracyProject.Assets
                 UniversalLocation = "P-3, SS-278, G-2976, LS-3976",
                 Description = "A357 is a blue main sequence star under the control of the machine race. ",
                 GeneralContents = "- Hydrogen, Helium, and other elements. ",
-                Accessable = true,
+                Accessable = false,
                 ExperiencePoints = 10
             }
         };

@@ -22,7 +22,6 @@ namespace TechnocracyProject
         AdamaTreasure,
         AdamaLocationsVisited,
         ListSpaceTimeLocations,
-        ListTARDISDestinations,
         ListItems,
         ListTreasures,
         Exit

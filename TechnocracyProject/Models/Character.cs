@@ -31,6 +31,7 @@ namespace TechnocracyProject
         private int _spaceTimeLocationID;
         private int _age; 
         private RaceType _race;
+        private bool _alive;
 
         #endregion
 
@@ -58,6 +59,12 @@ namespace TechnocracyProject
         {
             get { return _race; }
             set { _race = value; }
+        }
+
+        public bool Alive
+        {
+            get { return _alive; }
+            set { _alive = value; }
         }
 
         #endregion

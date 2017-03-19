@@ -119,6 +119,10 @@ namespace TechnocracyProject
                     case AdamaAction.None:
                         break;
 
+                    case AdamaAction.AdamaInfo:
+                        _gameConsoleView.DisplayTravelerInfo(_sar);
+                        break;
+
                     case AdamaAction.LookAround:
                         _gameConsoleView.DisplayLookAround();
                         break;
@@ -147,10 +151,6 @@ namespace TechnocracyProject
                         }
 
                         _gameConsoleView.DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
-                        break;
-
-                    case AdamaAction.AdamaInfo:
-                        _gameConsoleView.DisplayTravelerInfo();
                         break;
 
                     case AdamaAction.ListSpaceTimeLocations:
