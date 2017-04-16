@@ -152,6 +152,18 @@ namespace TechnocracyProject
                         LookAtAction();
                         break;
 
+                    case AdamaAction.PickUp:
+                        PickUpAction();
+                        break;
+
+                    case AdamaAction.PutDown:
+                        PutDownAction();
+                        break;
+
+                    case AdamaAction.Inventory:
+                        _gameConsoleView.DisplayInventory();
+                        break;
+
                     case AdamaAction.ListSpaceTimeLocations:
                         _gameConsoleView.DisplayListOfSpaceTimeLocations();
                         break;
