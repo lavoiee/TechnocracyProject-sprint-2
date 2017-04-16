@@ -214,6 +214,24 @@ namespace TechnocracyProject
             return gameObjectToReturn;
         }
 
+        public List<GameObject> GetGameObjectsBySpaceTimeLocationId(int spaceTimeLocationId)
+        {
+            List<GameObject> gameObjects = new List<GameObject>();
+
+            //
+            // run through the game object list and grab all that are in the current space-time location
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == spaceTimeLocationId)
+                {
+                    gameObjects.Add(gameObject);
+                }
+            }
+
+            return gameObjects;
+        }
+
         public List<GameObject> GetGameObjectBySpaceTimeLocationId(int spaceTimeLocationId)
         {
             List<GameObject> gameObjects = new List<GameObject>();
@@ -229,6 +247,97 @@ namespace TechnocracyProject
                 }
             }
             return gameObjects;
+        }
+
+        /// <summary>
+        /// validate game object id number in current location
+        /// </summary>
+        /// <param name="gameObjectId"></param>
+        /// <returns>is Id valid</returns>
+        public bool IsValidGameObjectByLocationId(int gameObjectId, int currentSpaceTimeLocation)
+        {
+            List<int> gameObjectIds = new List<int>();
+
+            //
+            // create a list of game object ids in current space-time location
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == currentSpaceTimeLocation)
+                {
+                    gameObjectIds.Add(gameObject.Id);
+                }
+
+            }
+
+            //
+            // determine if the game object id is a valid id and return the result
+            //
+            if (gameObjectIds.Contains(gameObjectId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// get all traveler objects in a location
+        /// </summary>
+        /// <param name="spaceTimeLocationId">space-time location id</param>
+        /// <returns>list of traveler objects</returns>
+        public List<TravelerObject> GetTravelerObjectsBySpaceTimeLocationId(int spaceTimeLocationId)
+        {
+            List<TravelerObject> travelerObjects = new List<TravelerObject>();
+
+            //
+            // run through the game object list and grab all that are in the current space-time location
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == spaceTimeLocationId && gameObject is TravelerObject)
+                {
+                    travelerObjects.Add(gameObject as TravelerObject);
+                }
+            }
+
+            return travelerObjects;
+        }
+
+        /// <summary>
+        /// validate traveler object id number in current location
+        /// </summary>
+        /// <param name="travelerObjectId"></param>
+        /// <returns>is Id valid</returns>
+        public bool IsValidTravelerObjectByLocationId(int travelerObjectId, int currentSpaceTimeLocation)
+        {
+            List<int> travelerObjectIds = new List<int>();
+
+            //
+            // create a list of traveler object ids in current space-time location
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == currentSpaceTimeLocation && gameObject is TravelerObject)
+                {
+                    travelerObjectIds.Add(gameObject.Id);
+                }
+
+            }
+
+            //
+            // determine if the game object id is a valid id and return the result
+            //
+            if (travelerObjectIds.Contains(travelerObjectId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
     }

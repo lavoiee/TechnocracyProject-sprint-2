@@ -64,6 +64,34 @@ namespace TechnocracyProject.Assets
                 CanInventory = true,
                 IsConsumable = false,
                 IsVisible = true
+            },
+
+            new TravelerObject
+            {
+                Id = 8,
+                Name = "Aion Tracker",
+                SpaceTimeLocationId = 0,
+                Description =
+                    "Standard issue device worn around the wrist that allows for tacking and messaging.",
+                Type = TravelerObjectType.Information,
+                Value = 0,
+                CanInventory = true,
+                IsConsumable = false,
+                IsVisible = true
+            },
+
+            new TravelerObject
+            {
+                Id = 9,
+                Name = "RatPak 47",
+                SpaceTimeLocationId = 0,
+                Description =
+                    "Standard issue ration package contain nutrients for 72 hours.",
+                Type = TravelerObjectType.Food,
+                Value = 0,
+                CanInventory = true,
+                IsConsumable = true,
+                IsVisible = true
             }
 
         };

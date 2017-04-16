@@ -515,6 +515,15 @@ namespace TechnocracyProject
             SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
             DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
         }
+        /// <summary>
+        /// display all relevant information about a game object
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void DisplayGameObjectInfo(GameObject gameObject)
+        {
+            DisplayGamePlayScreen("Current Location", Text.LookAt(gameObject), ActionMenu.ObjectMenu, "");
+        }
+
 
         public int DisplayGetNextSpaceTimeLocation()
         {
@@ -554,6 +563,109 @@ namespace TechnocracyProject
             return spaceTimeLocationId;
         }
 
+        /// <summary>
+        /// display the information required for the player to choose an object to look at
+        /// </summary>
+        /// <returns></returns>
+        public int DisplayGetGameObjectToLookAt()
+        {
+            int gameObjectId = 0;
+            bool validGamerObjectId = false;
+
+            //
+            // get a list of game objects in the current space-time location
+            //
+            List<GameObject> gameObjectsInSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationId);
+
+            if (gameObjectsInSpaceTimeLocation.Count > 0)
+            {
+                DisplayGamePlayScreen("Look at a Object", Text.GameObjectsChooseList(gameObjectsInSpaceTimeLocation), ActionMenu.ObjectMenu, "");
+
+                while (!validGamerObjectId)
+                {
+                    //
+                    // get an integer from the player
+                    //
+                    GetInteger($"Enter the Id number of the object you wish to look at: ", 0, 0, out gameObjectId);
+
+                    //
+                    // validate integer as a valid game object id and in current location
+                    //
+                    if (_gameUniverse.IsValidGameObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationId))
+                    {
+                        validGamerObjectId = true;
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage("It appears you entered an invalid game object id. Please try again.");
+                    }
+                }
+            }
+            else
+            {
+                DisplayGamePlayScreen("Look at a Object", "It appears there are no game objects here.", ActionMenu.ObjectMenu, "");
+            }
+
+            return gameObjectId;
+        }
+
+        /// <summary>
+        /// display the information required for the player to choose an object to pick up
+        /// </summary>
+        /// <returns>game object Id</returns>
+        public int DisplayGetTravelerObjectToPickUp()
+        {
+            int gameObjectId = 0;
+            bool validGameObjectId = false;
+
+            //
+            // get a list of traveler objects in the current space-time location
+            //
+            List<TravelerObject> travelerObjectsInSpaceTimeLocation = _gameUniverse.GetTravelerObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationId);
+
+            if (travelerObjectsInSpaceTimeLocation.Count > 0)
+            {
+                DisplayGamePlayScreen("Pick Up Game Object", Text.GameObjectsChooseList(travelerObjectsInSpaceTimeLocation), ActionMenu.ObjectMenu, "");
+
+                while (!validGameObjectId)
+                {
+                    //
+                    // get an integer from the player
+                    //
+                    GetInteger($"Enter the Id number of the object you wish to add to your inventory: ", 0, 0, out gameObjectId);
+
+                    //
+                    // validate integer as a valid game object id and in current location
+                    //
+                    if (_gameUniverse.IsValidTravelerObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationId))
+                    {
+                        TravelerObject travelerObject = _gameUniverse.GetGameObjectById(gameObjectId) as TravelerObject;
+                        if (travelerObject.CanInventory)
+                        {
+                            validGameObjectId = true;
+                        }
+                        else
+                        {
+                            ClearInputBox();
+                            DisplayInputErrorMessage("It appears you may not inventory that object. Please try again.");
+                        }
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage("It appears you entered an invalid game object id. Please try again.");
+                    }
+                }
+            }
+            else
+            {
+                DisplayGamePlayScreen("Pick Up Game Object", "It appears there are no game objects here.", ActionMenu.ObjectMenu, "");
+            }
+
+            return gameObjectId;
+        }
+
         public void DisplayListOfSpaceTimeLocations()
         {
             DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
@@ -562,6 +674,72 @@ namespace TechnocracyProject
         public void DisplayListOfAllGameObjects()
         {
             DisplayGamePlayScreen("List: Game Object", Text.ListAllGameObjects(_gameUniverse.GameObjects), ActionMenu.MainMenu, "");
+        }
+
+        /// <summary>
+        /// confirm object added to inventory
+        /// </summary>
+        /// <param name="objectAddedToInventory">game object</param>
+        public void DisplayConfirmTravelerObjectAddedToInventory(TravelerObject objectAddedToInventory)
+        {
+            DisplayGamePlayScreen("Pick Up Game Object", $"The {objectAddedToInventory.Name} has been added to your inventory.", ActionMenu.ObjectMenu, "");
+        }
+
+        /// <summary>
+        /// confirm object removed from inventory
+        /// </summary>
+        /// <param name="objectRemovedFromInventory">game object</param>
+        public void DisplayConfirmTravelerObjectRemovedFromInventory(TravelerObject objectRemovedFromInventory)
+        {
+            DisplayGamePlayScreen("Put Down Game Object", $"The {objectRemovedFromInventory.Name} has been removed from your inventory.", ActionMenu.ObjectMenu, "");
+        }
+
+        /// <summary>
+        /// display the information required for the player to choose an object to pick up
+        /// </summary>
+        /// <returns>game object Id</returns>
+        public int DisplayGetInventoryObjectToPutDown()
+        {
+            int travelerObjectId = 0;
+            bool validInventoryObjectId = false;
+
+            if (_gameTraveler.Inventory.Count > 0)
+            {
+                DisplayGamePlayScreen("Put Down Game Object", Text.GameObjectsChooseList(_gameTraveler.Inventory), ActionMenu.ObjectMenu, "");
+
+                while (!validInventoryObjectId)
+                {
+                    //
+                    // get an integer from the player
+                    //
+                    GetInteger($"Enter the Id number of the object you wish to remove from your inventory: ", 0, 0, out travelerObjectId);
+
+                    //
+                    // find object in inventory
+                    // note: LINQ used, but a foreach loop may also be used 
+                    //
+                    TravelerObject objectToPutDown = _gameTraveler.Inventory.FirstOrDefault(o => o.Id == travelerObjectId);
+
+                    //
+                    // validate object in inventory
+                    //
+                    if (objectToPutDown != null)
+                    {
+                        validInventoryObjectId = true;
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage("It appears you entered the Id of an object not in the inventory. Please try again.");
+                    }
+                }
+            }
+            else
+            {
+                DisplayGamePlayScreen("Pick Up Game Object", "It appears there are no objects currently in inventory.", ActionMenu.ObjectMenu, "");
+            }
+
+            return travelerObjectId;
         }
         #endregion
     }

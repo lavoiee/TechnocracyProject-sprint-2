@@ -56,6 +56,12 @@ namespace TechnocracyProject
             _gameConsoleView = new ConsoleView(_sar, _gameUniverse);
             _playingGame = true;
 
+            //
+            // add initial items to the traveler's inventory
+            //
+            _sar.Inventory.Add(_gameUniverse.GetGameObjectById(8) as TravelerObject);
+            _sar.Inventory.Add(_gameUniverse.GetGameObjectById(9) as TravelerObject);
+
             Console.CursorVisible = false;
         }
 
@@ -153,8 +159,16 @@ namespace TechnocracyProject
                         _gameConsoleView.DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
                         break;
 
+                    case AdamaAction.LookAt:
+                        LookAtAction();
+                        break;
+
                     case AdamaAction.ListSpaceTimeLocations:
                         _gameConsoleView.DisplayListOfSpaceTimeLocations();
+                        break;
+
+                    case AdamaAction.ListGameObjects:
+                        _gameConsoleView.DisplayListOfAllGameObjects();
                         break;
 
                     case AdamaAction.Exit:
@@ -202,6 +216,94 @@ namespace TechnocracyProject
             }
         }
 
+        /// <summary>
+        /// process the Look At action
+        /// </summary>
+        private void LookAtAction()
+        {
+            //
+            // display a list of game objects in space-time location and get a player choice
+            //
+            int gameObjectToLookAtId = _gameConsoleView.DisplayGetGameObjectToLookAt();
+
+            //
+            // display game object info
+            //
+            if (gameObjectToLookAtId != 0)
+            {
+                //
+                // get the game object from the universe
+                //
+                GameObject gameObject = _gameUniverse.GetGameObjectById(gameObjectToLookAtId);
+
+                //
+                // display information for the object chosen
+                //
+                _gameConsoleView.DisplayGameObjectInfo(gameObject);
+            }
+        }
+
+
+        /// <summary>
+        /// process the Pick Up action
+        /// </summary>
+        private void PickUpAction()
+        {
+            //
+            // display a list of traveler objects in space-time location and get a player choice
+            //
+            int travelerObjectToPickUpId = _gameConsoleView.DisplayGetTravelerObjectToPickUp();
+
+            //
+            // add the traveler object to traveler's inventory
+            //
+            if (travelerObjectToPickUpId != 0)
+            {
+                //
+                // get the game object from the universe
+                //
+                TravelerObject travelerObject = _gameUniverse.GetGameObjectById(travelerObjectToPickUpId) as TravelerObject;
+
+                //
+                // note: traveler object is added to list and the space-time location is set to 0
+                //
+                _sar.Inventory.Add(travelerObject);
+                travelerObject.SpaceTimeLocationId = 0;
+
+                //
+                // display confirmation message
+                //
+                _gameConsoleView.DisplayConfirmTravelerObjectAddedToInventory(travelerObject);
+            }
+        }
+
+        /// <summary>
+        /// process the Put Down action
+        /// </summary>
+        private void PutDownAction()
+        {
+            //
+            // display a list of traveler objects in inventory and get a player choice
+            //
+            int inventoryObjectToPutDownId = _gameConsoleView.DisplayGetInventoryObjectToPutDown();
+
+            //
+            // get the game object from the universe
+            //
+            TravelerObject travelerObject = _gameUniverse.GetGameObjectById(inventoryObjectToPutDownId) as TravelerObject;
+
+            //
+            // remove the object from inventory and set the space-time location to the current value
+            //
+            _sar.Inventory.Remove(travelerObject);
+            travelerObject.SpaceTimeLocationId = _sar.SpaceTimeLocationId;
+
+            //
+            // display confirmation message
+            //
+            _gameConsoleView.DisplayConfirmTravelerObjectRemovedFromInventory(travelerObject);
+
+        }
         #endregion
     }
 }

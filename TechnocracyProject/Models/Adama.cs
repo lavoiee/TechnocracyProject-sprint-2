@@ -56,8 +56,10 @@ namespace TechnocracyProject
         private int _experiencePoints;
         private int _health;
         private int _lives;
+        protected int _spaceTimeLocationId;
         private List<int> _spaceTimeLocationsVisited;
-        
+        private List<TravelerObject> _inventory;
+
         #endregion
 
 
@@ -132,6 +134,18 @@ namespace TechnocracyProject
         {
             get { return _weapon; }
             set { _weapon = value; }
+        }
+
+        public int SpaceTimeLocationId
+        {
+            get { return _spaceTimeLocationId; }
+            set { _spaceTimeLocationId = value; }
+        }
+
+        public List<TravelerObject> Inventory
+        {
+            get { return _inventory; }
+            set { _inventory = value; }
         }
         #endregion
 

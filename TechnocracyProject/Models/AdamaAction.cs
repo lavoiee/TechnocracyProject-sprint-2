@@ -11,19 +11,27 @@ namespace TechnocracyProject
         None,
         MissionSetup,
         LookAround,
-        LookAt,
-        PickUpItem,
-        PickUpTreasure,
-        PutDownItem,
-        PutDownTreasure,
         Travel,
+
+        TravelerMenu,
         AdamaInfo,
-        AdamaInventory,
-        AdamaTreasure,
+        Inventory,
         AdamaLocationsVisited,
+
+        ObjectMenu,
+        LookAt,
+        PickUp,
+        PutDown,
+
+        NonplayerCharacterMenu,
+        TalkTo,
+
+        AdminMenu,
         ListSpaceTimeLocations,
-        ListItems,
-        ListTreasures,
+        ListGameObjects,
+        ListNonplayerCharacters,
+
+        ReturnToMainMenu,
         Exit
     }
 }
