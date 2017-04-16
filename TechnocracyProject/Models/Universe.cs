@@ -19,6 +19,14 @@ namespace TechnocracyProject
         //
         private List<SpaceTimeLocation> _spaceTimeLocations;
         private List<GameObject> _gameObjects;
+        private List<Npc> _npcs;
+
+        public List<Npc> Npcs
+        {
+            get { return _npcs; }
+            set { _npcs = value; }
+        }
+
 
         public List<GameObject> GameObjects
         {
