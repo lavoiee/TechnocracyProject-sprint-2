@@ -94,9 +94,9 @@ namespace TechnocracyProject
 
             string planetList = null;
 
-            foreach (Planet HomePlanet in Enum.GetValues(typeof(Planet)))
+            foreach (Adama.Planet HomePlanet in Enum.GetValues(typeof(Adama.Planet)))
             {
-                if (HomePlanet != Planet.None)
+                if (HomePlanet != Adama.Planet.None)
                 {
                     planetList += $"\t{HomePlanet}\n";
                 }
@@ -119,9 +119,9 @@ namespace TechnocracyProject
 
             string galaxyList = null;
 
-            foreach (Galaxy HomeGalaxy in Enum.GetValues(typeof(Galaxy)))
+            foreach (Adama.Galaxy HomeGalaxy in Enum.GetValues(typeof(Adama.Galaxy)))
             {
-                if (HomeGalaxy != Galaxy.None)
+                if (HomeGalaxy != Adama.Galaxy.None)
                 {
                     galaxyList += $"\t{HomeGalaxy}\n";
                 }
@@ -144,9 +144,9 @@ namespace TechnocracyProject
 
             string dimensionList = null;
 
-            foreach (Dimension HomeDimension in Enum.GetValues(typeof(Dimension)))
+            foreach (Adama.Dimension HomeDimension in Enum.GetValues(typeof(Adama.Dimension)))
             {
-                if (HomeDimension != Dimension.None)
+                if (HomeDimension != Adama.Dimension.None)
                 {
                     dimensionList += $"\t{HomeDimension}\n";
                 }

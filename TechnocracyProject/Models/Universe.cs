@@ -54,7 +54,7 @@ namespace TechnocracyProject
             // assign this _spaceTimeLocations to the universe object's collection of SpaceTimeLocations and also
             // cast the IEnumberable collection of SpaceTimeLocations as a List of SpaceTimeLocations
             //
-            _spaceTimeLocations = UniverseObjects.SpaceTimeLocations as List<SpaceTimeLocation>;
+            _spaceTimeLocations = UniverseObjectSpaceTimeLocations.SpaceTimeLocations as List<SpaceTimeLocation>;
         }
 
         #endregion

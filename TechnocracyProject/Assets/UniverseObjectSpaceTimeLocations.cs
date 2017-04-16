@@ -9,10 +9,7 @@ namespace TechnocracyProject.Assets
     /// <summary>
     /// static class to hold all objects in the game universe; locations, game objects, npc's
     /// </summary>
-    public static class UniverseObjects
-    //the universe is like the "game board"
-
-    //remember, static means you don't have to instantiate it
+    public static partial class UniverseObjectSpaceTimeLocations
     {
         public static IEnumerable<SpaceTimeLocation> SpaceTimeLocations = new List<SpaceTimeLocation>()
         {

@@ -22,7 +22,8 @@ namespace TechnocracyProject
         #region FIELDS
 
         //
-        // declare a Adama object for the ConsoleView object to use
+        // declare a Adama object for the ConsoleView object to use.
+        // These are temporary and are used to pass the object reference back.
         //
         Adama _gameTraveler;
         Universe _gameUniverse;
@@ -155,9 +156,13 @@ namespace TechnocracyProject
             }
             return true;
         }
-        //public int GetInteger()
+
+        //public static T ValidateItem<T>(T eEnumItem)
         //{
-        //    return int.Parse(Console.ReadLine());
+        //    if (Enum.IsDefined(typeof(T), eEnumItem) == true)
+        //        return eEnumItem;
+        //    else
+        //        return default(T);
         //}
 
         /// <summary>
@@ -172,24 +177,24 @@ namespace TechnocracyProject
             return raceType;
         }
 
-        public Planet GetHomeWorld()
+        public Adama.Planet GetHomeWorld()
         {
-            Planet homeWorld;
-            Enum.TryParse<Planet>(Console.ReadLine(), out homeWorld);
+            Adama.Planet homeWorld;       
+            Enum.TryParse<Adama.Planet>(Console.ReadLine(), out homeWorld);
             return homeWorld;
         }
 
-        public Galaxy GetHomeGalaxy()
+        public Adama.Galaxy GetHomeGalaxy()
         {
-            Galaxy homeGalaxy;
-            Enum.TryParse<Galaxy>(Console.ReadLine(), out homeGalaxy);
+            Adama.Galaxy homeGalaxy;
+            Enum.TryParse<Adama.Galaxy>(Console.ReadLine(), out homeGalaxy);
             return homeGalaxy;
         }
 
-        public Dimension GetHomeDimension()
+        public Adama.Dimension GetHomeDimension()
         {
-            Dimension dimension;
-            Enum.TryParse<Dimension>(Console.ReadLine(), out dimension);
+            Adama.Dimension dimension;
+            Enum.TryParse<Adama.Dimension>(Console.ReadLine(), out dimension);
             return dimension;
         }
 

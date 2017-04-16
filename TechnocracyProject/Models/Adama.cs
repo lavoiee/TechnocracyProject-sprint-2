@@ -6,31 +6,32 @@ using System.Threading.Tasks;
 
 namespace TechnocracyProject
 {
-    public enum Dimension { None, A1, A2, A3, A4 };
-    public enum Galaxy
-    {
-        None,
-        MilkyWay,
-        Andromeda,
-        Pegasus,
-        Aquarius,
-        Atlantis
-    }
-
-    public enum Planet
-    {
-        None,
-        Earth,
-        Caledan,
-        GiediPrime,
-        Kaitain
-    }
+    
 
     /// <summary>
     /// the character class the player uses in the game
     /// </summary>
     public class Adama : Character
     {
+        public enum Dimension { None, A1, A2, A3, A4 };
+        public enum Galaxy
+        {
+            None,
+            MilkyWay,
+            Andromeda,
+            Pegasus,
+            Aquarius,
+            Atlantis
+        }
+
+        public enum Planet
+        {
+            None,
+            Earth,
+            Caledan,
+            GiediPrime,
+            Kaitain
+        }
         #region ENUMERABLES
         public enum WeaponType
         {
@@ -43,6 +44,7 @@ namespace TechnocracyProject
         #endregion
 
         #region FIELDS
+        // TODO: Planet, Galaxy, and Dimension do not show up in Adama info menu 
         private Planet _homeWorld;
         private Galaxy _homeGalaxy;
         private Dimension _homeDimension;
