@@ -11,6 +11,6 @@ namespace TechnocracyProject.Assets
         public static List<GameObject> gameObjects = new List<GameObject>()
         {
 
-        }
+        };
     }
 }
