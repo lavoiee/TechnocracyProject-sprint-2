@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechnocracyProject
 {
-    abstract class GameObject
+    public abstract class GameObject
     {
         public abstract int Id { get; set; }
         public abstract string Name { get; set; }

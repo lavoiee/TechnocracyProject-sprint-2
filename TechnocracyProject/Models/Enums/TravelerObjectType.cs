@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace TechnocracyProject
 {
-    class TravelerObjectTypes
-    {
         public enum TravelerObjectType
         {
             Food,
@@ -16,5 +14,4 @@ namespace TechnocracyProject
             Treasure,
             Information
         }
-    }
 }

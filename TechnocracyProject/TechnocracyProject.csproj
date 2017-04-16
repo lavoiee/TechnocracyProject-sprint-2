@@ -53,7 +53,7 @@
     <Compile Include="ConsoleUtilities\ConsoleWindowHelper.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Models\Character.cs" />
-    <Compile Include="Models\Enums\TravelerObjectTypes.cs" />
+    <Compile Include="Models\Enums\TravelerObjectType.cs" />
     <Compile Include="Models\GameObject.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Adama.cs" />
