@@ -53,11 +53,14 @@
     <Compile Include="ConsoleUtilities\ConsoleWindowHelper.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\Civilian.cs" />
     <Compile Include="Models\Enums\TravelerObjectType.cs" />
     <Compile Include="Models\GameObject.cs" />
+    <Compile Include="Models\ISpeak.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Adama.cs" />
     <Compile Include="Models\AdamaAction.cs" />
+    <Compile Include="Models\Npc.cs" />
     <Compile Include="Models\SpaceTimeLocation.cs" />
     <Compile Include="Models\TravelerObject.cs" />
     <Compile Include="Models\Universe.cs" />
