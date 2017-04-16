@@ -99,7 +99,7 @@ namespace TechnocracyProject
             //
             // prepare game play screen
             //
-            _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_sar.SpaceTimeLocationID);
+            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_sar.SpaceTimeLocationID);
             _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
 
             //
@@ -115,7 +115,14 @@ namespace TechnocracyProject
                 //
                 // get next game action from player
                 //
-                travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
+                if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MainMenu)
+                {
+                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
+                }
+                else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.AdminMenu)
+                {
+                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.AdminMenu);
+                }
 
                 //
                 // choose an action based on the player's menu choice
@@ -134,29 +141,11 @@ namespace TechnocracyProject
                         break;
 
                     case AdamaAction.Travel:
-                        //
-                        // get new location choice and update the current location property
-                        //                        
-                        _sar.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
-                        _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_sar.SpaceTimeLocationID);
-
-                        //
-                        // set the game play screen to the current location info format
-                        //
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
+                        TravelAction();                    
                         break;
 
                     case AdamaAction.AdamaLocationsVisited:
-                        //
-                        // generate a list of space time locations that have been visited
-                        //
-                        List<SpaceTimeLocation> visitedSpaceTimeLocations = new List<SpaceTimeLocation>();
-                        foreach (int spaceTimeLocationId in _sar.SpaceTimeLocationsVisited)
-                        {
-                            visitedSpaceTimeLocations.Add(_gameUniverse.GetSpaceTimeLocationByID(spaceTimeLocationId));
-                        }
-
-                        _gameConsoleView.DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayLocationsVisited();
                         break;
 
                     case AdamaAction.LookAt:
@@ -169,6 +158,16 @@ namespace TechnocracyProject
 
                     case AdamaAction.ListGameObjects:
                         _gameConsoleView.DisplayListOfAllGameObjects();
+                        break;
+
+                    case AdamaAction.AdminMenu:
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
+                        _gameConsoleView.DisplayGamePlayScreen("Admin Menu", "Select an operation from the menu.", ActionMenu.AdminMenu, "");
+                        break;
+
+                    case AdamaAction.ReturnToMainMenu:
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
+                        _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
                         break;
 
                     case AdamaAction.Exit:
@@ -303,6 +302,20 @@ namespace TechnocracyProject
             //
             _gameConsoleView.DisplayConfirmTravelerObjectRemovedFromInventory(travelerObject);
 
+        }
+
+        private void TravelAction()
+        {
+            //
+            // get new location choice and update the current location property
+            //                        
+            _sar.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
+            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_sar.SpaceTimeLocationID);
+
+            //
+            // set the game play screen to the current location info format
+            //
+            _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
         }
         #endregion
     }

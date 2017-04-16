@@ -155,11 +155,13 @@ namespace TechnocracyProject
         public Adama()
         {
             _spaceTimeLocationsVisited = new List<int>();
+            _inventory = new List<TravelerObject>();
         }
 
         public Adama(string name, RaceType race, int spaceTimeLocationID) : base(name, race, spaceTimeLocationID)
         {
             _spaceTimeLocationsVisited = new List<int>();
+            _inventory = new List<TravelerObject>();
         }
 
         #endregion

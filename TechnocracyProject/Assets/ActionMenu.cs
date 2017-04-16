@@ -18,6 +18,16 @@ namespace TechnocracyProject
                     }
         };
 
+        public enum CurrentMenu
+        {
+            MissionIntro,
+            InitializeMission,
+            MainMenu,
+            AdminMenu
+        };
+
+        public static CurrentMenu currentMenu = CurrentMenu.MainMenu;
+
         public static Menu InitializeMission = new Menu()
         {
             MenuName = "InitializeMission",
@@ -33,17 +43,32 @@ namespace TechnocracyProject
             MenuName = "MainMenu",
             MenuTitle = "Main Menu",
             MenuChoices = new Dictionary<char, AdamaAction>()
-            {
-                { '1', AdamaAction.AdamaInfo },
-                { '2', AdamaAction.LookAround },
-                { '3', AdamaAction.LookAt },
-                { '4', AdamaAction.Travel },
-                { '5', AdamaAction.AdamaLocationsVisited },
-                { '6', AdamaAction.ListSpaceTimeLocations },
-                { '7', AdamaAction.ListGameObjects },
-                { '8', AdamaAction.Exit }
-            }
+                {
+                    { '1', AdamaAction.AdamaInfo },
+                    { '2', AdamaAction.LookAround },
+                    { '3', AdamaAction.LookAt },
+                    { '4', AdamaAction.PickUp },
+                    { '5', AdamaAction.PutDown },
+                    { '6', AdamaAction.Inventory },
+                    { '7', AdamaAction.Travel },
+                    { '8', AdamaAction.AdamaLocationsVisited },
+                    { '9', AdamaAction.AdminMenu },
+                    { '0', AdamaAction.Exit }
+                }
         };
+
+        public static Menu AdminMenu = new Menu()
+        {
+            MenuName = "AdminMenu",
+            MenuTitle = "Admin Menu",
+            MenuChoices = new Dictionary<char, AdamaAction>()
+                {
+                    { '1', AdamaAction.ListSpaceTimeLocations },
+                    { '2', AdamaAction.ListGameObjects},
+                    { '0', AdamaAction.ReturnToMainMenu }
+                }
+        };
+
         public static Menu ObjectMenu = new Menu()
         {
             MenuName = "ObjectMenu",

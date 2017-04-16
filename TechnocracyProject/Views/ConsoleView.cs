@@ -121,39 +121,56 @@ namespace TechnocracyProject
         }
 
         /// <summary>
-        /// get an integer value from the user
+        /// get a valid integer from the player - note: if max and min values are both 0, range validation is disabled
         /// </summary>
-        /// <returns>integer value</returns>
-
-        //TODO: Finish writing the methods ClearInputBox() and DisplayInputErrorMessages()
-        public bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
+        /// <param name="prompt">prompt message in console</param>
+        /// <param name="minimumValue">min. value</param>
+        /// <param name="maximumValue">max. value</param>
+        /// <param name="integerChoice">out value</param>
+        /// <returns></returns>
+        private bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
         {
             bool validResponse = false;
             integerChoice = 0;
+
+            //
+            // validate on range if either minimumValue and maximumValue are not 0
+            //
+            bool validateRange = (minimumValue != 0 || maximumValue != 0);
 
             DisplayInputBoxPrompt(prompt);
             while (!validResponse)
             {
                 if (int.TryParse(Console.ReadLine(), out integerChoice))
                 {
-                    if (integerChoice >= minimumValue & integerChoice <= maximumValue)
+                    if (validateRange)
                     {
-                        validResponse = true;
+                        if (integerChoice >= minimumValue && integerChoice <= maximumValue)
+                        {
+                            validResponse = true;
+                        }
+                        else
+                        {
+                            ClearInputBox();
+                            DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                            DisplayInputBoxPrompt(prompt);
+                        }
                     }
                     else
                     {
-                        ClearInputBox();
-                        DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
-                        DisplayInputBoxPrompt(prompt);
+                        validResponse = true;
                     }
                 }
                 else
                 {
                     ClearInputBox();
-                    DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                    DisplayInputErrorMessage($"You must enter an integer value. Please try again.");
                     DisplayInputBoxPrompt(prompt);
                 }
             }
+
+            Console.CursorVisible = false;
+
             return true;
         }
 
@@ -512,9 +529,22 @@ namespace TechnocracyProject
 
         public void DisplayLookAround()
         {
-            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
-            DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
+            //
+            // get current space-time location
+            //
+            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
+
+            //
+            // get list of game objects in current space-time location
+            //
+            List<GameObject> gameObjectsInCurrentSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
+
+            string messageBoxText = Text.LookAround(currentSpaceTimeLocation) + Environment.NewLine + Environment.NewLine;
+            messageBoxText += Text.GameObjectsChooseList(gameObjectsInCurrentSpaceTimeLocation);
+
+            DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
         }
+
         /// <summary>
         /// display all relevant information about a game object
         /// </summary>
@@ -544,7 +574,7 @@ namespace TechnocracyProject
                 //
                 if (_gameUniverse.IsValidSpaceTimeLocationId(spaceTimeLocationId))
                 {
-                    if (_gameUniverse.GetSpaceTimeLocationByID(spaceTimeLocationId).Accessable)
+                    if (_gameUniverse.GetSpaceTimeLocationById(spaceTimeLocationId).Accessable)
                     {
                         validSpaceTimeLocationId = true;
                     }
@@ -668,12 +698,26 @@ namespace TechnocracyProject
 
         public void DisplayListOfSpaceTimeLocations()
         {
-            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.AdminMenu, "");
         }
 
         public void DisplayListOfAllGameObjects()
         {
-            DisplayGamePlayScreen("List: Game Object", Text.ListAllGameObjects(_gameUniverse.GameObjects), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("List: Game Object", Text.ListAllGameObjects(_gameUniverse.GameObjects), ActionMenu.AdminMenu, "");
+        }
+
+        public void DisplayLocationsVisited()
+        {
+            //
+            // generate a list of space time locations that have been visited
+            //
+            List<SpaceTimeLocation> visitedSpaceTimeLocations = new List<SpaceTimeLocation>();
+            foreach (int spaceTimeLocationId in _gameTraveler.SpaceTimeLocationsVisited)
+            {
+                visitedSpaceTimeLocations.Add(_gameUniverse.GetSpaceTimeLocationById(spaceTimeLocationId));
+            }
+
+            DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
         }
 
         /// <summary>
