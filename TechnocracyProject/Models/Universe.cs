@@ -17,10 +17,16 @@ namespace TechnocracyProject
         //
         // list of all space-time locations
         //
-        private List<SpaceTimeLocation> _spaceTimeLocations; //this is the field
+        private List<SpaceTimeLocation> _spaceTimeLocations;
+        private List<GameObject> _gameObjects;
 
-        public List<SpaceTimeLocation> SpaceTimeLocations //this is the property
-                                                          // brings you a list of all of the spacetimelocations in the game
+        public List<GameObject> GameObjects
+        {
+            get { return _gameObjects; }
+            set { _gameObjects = value; }
+        }
+
+        public List<SpaceTimeLocation> SpaceTimeLocations
         {
             get { return _spaceTimeLocations; }
             set { _spaceTimeLocations = value; }
@@ -55,6 +61,7 @@ namespace TechnocracyProject
             // cast the IEnumberable collection of SpaceTimeLocations as a List of SpaceTimeLocations
             //
             _spaceTimeLocations = UniverseObjectSpaceTimeLocations.SpaceTimeLocations as List<SpaceTimeLocation>;
+            _gameObjects = UniverseObjectsGameObjects.gameObjects as List<GameObject>;
         }
 
         #endregion
@@ -157,6 +164,72 @@ namespace TechnocracyProject
             return spaceTimeLocation;
         }
 
+        public bool IsValidObjectByLocationId(int gameObjectId, int currentSpaceTimeLocation)
+        {
+            List<int> gameObjectIds = new List<int>();
+        
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == currentSpaceTimeLocation)
+                {
+                    gameObjectIds.Add(gameObject.Id);
+                }
+            }
+
+            //
+            // determine if the game object id is a valid id and return the result
+            //
+            if (gameObjectIds.Contains(gameObjectId))
+	        {
+                return true;
+	        }
+            else
+	        {
+                return false;
+	        }
+        }
+        public GameObject GetGameObjectById(int Id)
+        {
+            GameObject gameObjectToReturn = null;
+
+            //
+            // run through the game object list and grab the correct one
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.Id == Id)
+                {
+                    gameObjectToReturn = gameObject;
+                }
+            }
+
+            //
+            // the specified ID was not found in the universe
+            // throw an exception
+            if (gameObjectToReturn == null)
+            {
+                string feedbackMessage = $"The Game Object ID {Id} does not exist in the current Universe.";
+                throw new ArgumentException(feedbackMessage, Id.ToString());
+            }
+            return gameObjectToReturn;
+        }
+
+        public List<GameObject> GetGameObjectBySpaceTimeLocationId(int spaceTimeLocationId)
+        {
+            List<GameObject> gameObjects = new List<GameObject>();
+
+            //
+            // run throw the game object list and grab all that are in the current space-time location
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == spaceTimeLocationId)
+                {
+                    gameObjects.Add(gameObject);
+                }
+            }
+            return gameObjects;
+        }
         #endregion
     }
 }
